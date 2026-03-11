@@ -1,5 +1,5 @@
 /* ========================================
-   結界呼吸® 呼吸波動タイプ診断 v2
+   結界呼吸® 呼吸波動タイプ診断 v3
    CVR最適化ロジック
    ======================================== */
 
@@ -60,7 +60,7 @@ const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {
-        e.target.classList.add('visible');
+        e.target.classList.add('vis');
         revealObserver.unobserve(e.target);
       }
     });
@@ -69,7 +69,7 @@ const revealObserver = new IntersectionObserver(
 );
 
 function initRevealObservers() {
-  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+  document.querySelectorAll('.rv').forEach((el) => revealObserver.observe(el));
 }
 initRevealObservers();
 
@@ -250,7 +250,7 @@ function showSection(id) {
   // 結果セクションのrevealを初期化
   if (id === 'result') {
     setTimeout(() => {
-      section.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+      section.querySelectorAll('.rv').forEach((el) => revealObserver.observe(el));
     }, 100);
   }
 }
@@ -322,7 +322,7 @@ function renderQuestion() {
       btn.appendChild(ripple);
 
       // 選択状態表示
-      btn.classList.add('selected');
+      btn.classList.add('sel');
       area.querySelectorAll('.choice-btn').forEach((b) => {
         if (b !== btn) b.style.opacity = '0.4';
         b.style.pointerEvents = 'none';
@@ -368,24 +368,24 @@ function startAnalyzing() {
   const pctAnim = setInterval(() => {
     pct += Math.random() * 3 + 0.5;
     if (pct > 99) pct = 99;
-    pctEl.textContent = Math.floor(pct) + '%';
+    pctEl.innerHTML = Math.floor(pct) + '<span>%</span>';
   }, 80);
 
   // ステップアニメーション
   steps.forEach((stepId, i) => {
     setTimeout(() => {
-      document.getElementById(stepId).classList.add('active');
+      document.getElementById(stepId).classList.add('on');
     }, i * stepInterval);
 
     setTimeout(() => {
-      document.getElementById(stepId).classList.add('done');
+      document.getElementById(stepId).classList.add('ok');
     }, i * stepInterval + stepInterval * 0.7);
   });
 
   // 完了
   setTimeout(() => {
     clearInterval(pctAnim);
-    pctEl.textContent = '100%';
+    pctEl.innerHTML = '100<span>%</span>';
     setTimeout(() => showResult(), 500);
   }, totalDuration);
 }
@@ -443,7 +443,7 @@ function getResultType() {
 
 function initFloatCTA() {
   const floatCta = document.getElementById('float-cta');
-  const lineSection = document.querySelector('.line-cta-section');
+  const lineSection = document.querySelector('.line-block');
 
   const observer = new IntersectionObserver(
     (entries) => {
