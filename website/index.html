@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>呼吸波動タイプ診断｜あなたの呼吸が結界になる</title>
+  <meta name="description" content="たった10の質問で、あなたの呼吸に宿る固有の波動タイプを診断。呼吸を変えるだけで、見えない力場＝結界を張ることができます。">
+  <meta property="og:title" content="呼吸波動タイプ診断｜あなたの呼吸が結界になる">
+  <meta property="og:description" content="あなたの呼吸には、固有の波動が宿っています。その波動タイプを知ることが、人生を変える第一歩です。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/ogp.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- パーティクル背景 -->
+  <canvas id="particle-bg"></canvas>
+
+  <!-- ========== ランディング ========== -->
+  <section id="landing" class="section active">
+    <div class="container">
+
+      <!-- ファーストビュー：CTAまで1スクロール以内 -->
+      <div class="fv">
+        <div class="hero-visual">
+          <div class="breath-ring"></div>
+          <div class="breath-ring r2"></div>
+          <div class="breath-ring r3"></div>
+          <div class="breath-core"></div>
+        </div>
+
+        <p class="fv-eyecatch">あなたの呼吸には</p>
+        <h1 class="fv-headline">固有の<em>波動</em>が宿っている</h1>
+        <p class="fv-sub">呼吸を変えれば、脳波が変わる。<br>脳波が変われば、あなたを取り巻く<strong>「場」</strong>が変わる。</p>
+
+        <button class="btn-primary btn-pulse" onclick="startDiagnosis()">
+          あなたの波動タイプを診断する
+          <span class="btn-badge">無料・約2分</span>
+        </button>
+
+        <div class="live-counter">
+          <span class="live-dot"></span>
+          今日 <strong id="today-count">384</strong>人が診断中
+        </div>
+      </div>
+
+      <!-- セカンドビュー：権威性 + 共感 -->
+      <div class="reveal-group">
+        <div class="authority-bar">
+          <p class="authority-text">
+            脳科学の研究で実証済み ―<br>
+            呼吸のリズムは脳波の周波数帯を直接制御する
+          </p>
+        </div>
+
+        <div class="pain-section reveal">
+          <p class="pain-label">こんな感覚、ありませんか？</p>
+          <ul class="pain-list">
+            <li class="reveal">理由のない疲れが抜けない。朝起きても身体が重い</li>
+            <li class="reveal">人混みや特定の場所にいると、急に気分が沈む</li>
+            <li class="reveal">自分の中に「もっと何かあるはず」という感覚がある</li>
+            <li class="reveal">呼吸が浅い自覚はあるのに、深く吸えない</li>
+          </ul>
+          <p class="pain-answer reveal">
+            それは<strong>あなたの呼吸波動が乱れているサイン</strong>です。
+          </p>
+        </div>
+
+        <div class="concept-section reveal">
+          <p class="concept-text">
+            古来「息吹（いぶき）」と呼ばれた呼吸の力。<br>
+            現代の脳科学は、その仕組みを解き明かしました。
+          </p>
+          <p class="concept-text">
+            呼吸のリズムが脳波を変え、<br>
+            脳波があなたの周囲に<em class="glow-word">「場」</em>をつくる。
+          </p>
+          <p class="concept-key reveal">
+            この場を、私たちは<br>
+            <span class="keyword-large">結界</span><br>
+            と呼んでいます。
+          </p>
+        </div>
+
+        <!-- CTA 2回目 -->
+        <div class="cta-mid reveal">
+          <p class="cta-mid-lead">まずは、あなたの呼吸に宿る<br>波動タイプを知ることから。</p>
+          <button class="btn-primary" onclick="startDiagnosis()">
+            無料で診断する<span class="btn-badge">約2分</span>
+          </button>
+        </div>
+
+        <!-- 社会的証明 -->
+        <div class="social-proof reveal">
+          <p class="sp-label">診断を受けた方の声</p>
+          <div class="sp-ticker">
+            <div class="sp-track">
+              <div class="sp-card">
+                <p class="sp-text">「自分がα共鳴型だと知ってから、人間関係の悩みの原因がやっと腑に落ちました」</p>
+                <p class="sp-meta">30代女性・会社員</p>
+              </div>
+              <div class="sp-card">
+                <p class="sp-text">「鳥肌が立ちました。なぜ私が人混みで疲れるのか、初めて理解できた」</p>
+                <p class="sp-meta">40代女性・セラピスト</p>
+              </div>
+              <div class="sp-card">
+                <p class="sp-text">「スピリチュアルに懐疑的だったけど、脳波の話は科学的で納得できた」</p>
+                <p class="sp-meta">30代男性・エンジニア</p>
+              </div>
+              <div class="sp-card">
+                <p class="sp-text">「診断結果を読んで涙が出ました。ずっと言葉にできなかった自分がそこにいた」</p>
+                <p class="sp-meta">50代女性・主婦</p>
+              </div>
+              <div class="sp-card">
+                <p class="sp-text">「自分がα共鳴型だと知ってから、人間関係の悩みの原因がやっと腑に落ちました」</p>
+                <p class="sp-meta">30代女性・会社員</p>
+              </div>
+              <div class="sp-card">
+                <p class="sp-text">「鳥肌が立ちました。なぜ私が人混みで疲れるのか、初めて理解できた」</p>
+                <p class="sp-meta">40代女性・セラピスト</p>
+              </div>
+            </div>
+          </div>
+          <p class="sp-count">累計 <strong id="total-count">12,849</strong> 人が診断済み</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 診断 ========== -->
+  <section id="diagnosis" class="section">
+    <div class="container">
+      <div class="dx-header">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="dx-meta">
+          <span class="dx-step"><span id="current-q">1</span> / 10</span>
+          <span class="dx-encouragement" id="dx-encouragement"></span>
+        </div>
+      </div>
+      <div id="question-area"></div>
+    </div>
+  </section>
+
+  <!-- ========== 分析中 ========== -->
+  <section id="analyzing" class="section">
+    <div class="container center-content">
+      <div class="az-visual">
+        <svg class="az-wave" viewBox="0 0 400 100" preserveAspectRatio="none">
+          <path class="az-wave-path p1" d="M0,50 Q100,10 200,50 T400,50" />
+          <path class="az-wave-path p2" d="M0,50 Q100,90 200,50 T400,50" />
+          <path class="az-wave-path p3" d="M0,50 Q100,30 200,50 T400,50" />
+        </svg>
+        <div class="az-orb"></div>
+      </div>
+      <h2 class="az-title">あなたの呼吸波動を<br>解析しています</h2>
+      <div class="az-steps">
+        <div class="az-step" id="az-1"><span class="az-check"></span>呼吸パターンの傾向を分析中</div>
+        <div class="az-step" id="az-2"><span class="az-check"></span>対応する脳波周波数帯を特定中</div>
+        <div class="az-step" id="az-3"><span class="az-check"></span>波動タイプを判定中</div>
+        <div class="az-step" id="az-4"><span class="az-check"></span>あなた専用の結界呼吸法を生成中</div>
+      </div>
+      <div class="az-pct" id="az-pct">0%</div>
+    </div>
+  </section>
+
+  <!-- ========== 結果 ========== -->
+  <section id="result" class="section">
+    <div class="container">
+
+      <p class="rs-overtitle">診断完了</p>
+      <p class="rs-label">あなたの呼吸波動タイプ</p>
+
+      <div class="rs-card" id="result-card">
+        <div class="rs-icon-wrap">
+          <div class="rs-icon-ring"></div>
+          <div class="rs-icon" id="result-icon"></div>
+        </div>
+        <h2 class="rs-name" id="result-type-name"></h2>
+        <p class="rs-subtitle" id="result-type-subtitle"></p>
+        <div class="rs-rarity" id="result-rarity"></div>
+      </div>
+
+      <div class="rs-brief" id="result-brief"></div>
+
+      <!-- チャート -->
+      <div class="rs-chart reveal">
+        <h3 class="rs-chart-title">あなたの波動バランス</h3>
+        <div class="chart-wrap">
+          <canvas id="radar-chart" width="300" height="300"></canvas>
+        </div>
+      </div>
+
+      <!-- ブラーで隠された詳細 = 欲求の壁 -->
+      <div class="rs-hidden reveal">
+        <div class="rs-hidden-preview">
+          <h3>才能と強み</h3>
+          <p>あなたは周囲の波動と共鳴する極めて希少な能力を持っています。人の感情を読み取り、場のエネルギーを浄化できる力は…</p>
+          <h3>注意すべきこと</h3>
+          <p>この波動タイプの持ち主が最も気をつけるべきなのは、他者のエネルギーを無意識に…</p>
+          <h3>相性</h3>
+          <p>最も相性が良いのはδ根源型です。あなたの繊細さを…</p>
+        </div>
+        <div class="rs-hidden-overlay">
+          <div class="rs-lock-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <p class="rs-lock-title">詳細結果は<br>LINEでお届けしています</p>
+          <p class="rs-lock-sub">友だち追加後、すぐに届きます</p>
+        </div>
+      </div>
+
+      <!-- LINE CTA：最重要エリア -->
+      <div class="line-cta-section">
+        <div class="line-cta-inner">
+          <p class="line-cta-heading">LINEで受け取れる内容</p>
+          <ul class="line-cta-list">
+            <li><strong>完全な診断結果</strong>（才能・弱点・相性・注意点）</li>
+            <li>あなた専用の<strong>結界呼吸法</strong>（具体的な手順）</li>
+            <li>今の時期に意識すべき<strong>波動の整え方</strong></li>
+          </ul>
+          <a href="#" id="line-link" class="btn-line" onclick="trackLineClick()">
+            <svg class="line-svg" viewBox="0 0 24 24" width="22" height="22"><path fill="#fff" d="M12 2C6.48 2 2 5.82 2 10.5c0 2.93 1.95 5.5 4.88 7.08-.17.62-.63 2.31-.72 2.66-.13.49.18.48.37.35.15-.1 2.37-1.61 3.34-2.27.7.1 1.42.18 2.13.18 5.52 0 10-3.82 10-8.5S17.52 2 12 2z"/></svg>
+            LINEで詳しい診断結果を見る
+          </a>
+          <div class="line-cta-bonus">
+            <span class="bonus-badge">特典</span>
+            <span>「結界呼吸 入門音源」を<strong>無料プレゼント</strong></span>
+          </div>
+          <p class="line-cta-note">
+            ※ 営業メッセージは送りません<br>
+            ※ いつでもブロック可能です
+          </p>
+        </div>
+      </div>
+
+      <!-- 追加の社会的証明 -->
+      <div class="rs-social reveal">
+        <div class="rs-social-item">
+          <span class="rs-social-num" id="same-type-count">2,847</span>
+          <span class="rs-social-label">人が同じタイプと診断</span>
+        </div>
+        <div class="rs-social-item">
+          <span class="rs-social-num">93%</span>
+          <span class="rs-social-label">が「当たっている」と回答</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フローティングCTA（結果ページ用） -->
+  <div class="float-cta" id="float-cta">
+    <a href="#" id="float-line-link" class="float-cta-btn" onclick="trackLineClick()">
+      <svg viewBox="0 0 24 24" width="20" height="20"><path fill="#fff" d="M12 2C6.48 2 2 5.82 2 10.5c0 2.93 1.95 5.5 4.88 7.08-.17.62-.63 2.31-.72 2.66-.13.49.18.48.37.35.15-.1 2.37-1.61 3.34-2.27.7.1 1.42.18 2.13.18 5.52 0 10-3.82 10-8.5S17.52 2 12 2z"/></svg>
+      LINEで詳細結果を受け取る
+    </a>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-brand">結界呼吸®</p>
+      <nav class="footer-nav">
+        <a href="#">特定商取引法に基づく表記</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">利用規約</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 結界呼吸® All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

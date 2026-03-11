@@ -1,0 +1,7 @@
+node_modules/
+.env
+line-bot/data/*.db
+*.log
+.DS_Store
+line-bot/public/audio/**/*.wav
+line-bot/public/pdf/*.pdf
